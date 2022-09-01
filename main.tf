@@ -24,7 +24,7 @@ module "governance" {
 }
 
 module "network" {
-  source = "./modules/governance"
+  source = "./modules/network"
   providers = {
     oci = oci
   }
