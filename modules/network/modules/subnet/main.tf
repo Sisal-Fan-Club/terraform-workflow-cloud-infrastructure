@@ -13,7 +13,7 @@ locals {
   cidr = var.cidr
   name = var.name
   exposed = var.exposed
-  default_gateway = var.default_gateway
+  default_gateway_id = var.default_gateway_id
   
   subnet = oci_core_subnet.subnet
 }
@@ -25,7 +25,7 @@ resource "oci_core_route_table" "routes" {
   
   route_rules {
     description = "Default route"
-    network_entity_id = local.default_gateway.id
+    network_entity_id = local.default_gateway_id
     destination = "0.0.0.0/0"
     destination_type = "CIDR_BLOCK"
   }
