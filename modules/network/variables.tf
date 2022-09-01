@@ -1,5 +1,5 @@
 variable "compartment" {
-  type = object
+  type = map(object)
 }
 
 variable "subnets" {
