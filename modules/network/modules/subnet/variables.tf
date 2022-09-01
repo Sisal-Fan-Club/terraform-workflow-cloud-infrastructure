@@ -14,4 +14,6 @@ variable "exposed" {
   default = false
 }
 
-variable "default_gateway" {}
+variable "default_gateway_id" {
+  type = string
+}
