@@ -21,7 +21,7 @@ locals {
 
 resource "oci_core_route_table" "routes" {
   compartment_id = local.vcn.compartment_id
-  vcn_id = local.vcn.vcn_id
+  vcn_id = local.vcn.id
   
   route_rules {
     description = "Default route"
