@@ -8,3 +8,8 @@ variable "name" {
 variable "cidr" {
   type = string
 }
+
+variable "exposed" {
+  type = bool
+  default = false
+}
