@@ -13,9 +13,22 @@ locals {
   cidr = var.cidr
   name = var.name
   exposed = var.exposed
-  routes_table = var.routes_table
+  default_gateway = var.default_gateway
   
   subnet = oci_core_subnet.subnet
+}
+
+
+resource "oci_core_route_table" "routes" {
+  compartment_id = local.vcn.compartment_id
+  vcn_id = local.vcn.vcn_id
+  
+  route_rules {
+    description = "Default route"
+    network_entity_id = local.default_gateway.id
+    destination = "0.0.0.0/0"
+    destination_type = "CIDR_BLOCK"
+  }
 }
 
 resource "oci_core_subnet" "subnet" {
@@ -27,5 +40,5 @@ resource "oci_core_subnet" "subnet" {
   
   prohibit_internet_ingress = !local.exposed
   
-  route_table_id = local.routes_table.id
+  route_table_id = oci_core_route_table.routes.id
 }
