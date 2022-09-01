@@ -10,7 +10,7 @@ locals {
   } 
 }
 
-variable "root_compartment" {
+variable "parent_compartment" {
   type = string
 }
 
