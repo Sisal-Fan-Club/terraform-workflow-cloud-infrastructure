@@ -47,5 +47,5 @@ module "subnet" {
   cidr = each.value.cidr
   exposed = each.value.exposed
   
-  default_gateway = each.value.exposed ? oci_core_internet_gateway.igw : oci_core_nat_gateway.ngw
+  default_gateway_id = each.value.exposed ? oci_core_internet_gateway.igw.id : oci_core_nat_gateway.ngw.id
 }
