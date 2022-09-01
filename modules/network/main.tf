@@ -20,7 +20,7 @@ resource "oci_core_vcn" "vcn" {
   
   display_name = local.compartment.description
   
-  cidr_blocks = values(local.subnets)
+  cidr_blocks = [ for name, subnet in local.subnets: subnet.cidr ]
 }
 
 resource "oci_core_internet_gateway" "igw" {
@@ -73,6 +73,8 @@ module "subnet" {
   }
   
   vcn = local.vcn
+  
   name = each.key
-  cidr = each.value
+  cidr = each.value.cidr
+  exposed = each.value.exposed
 }
