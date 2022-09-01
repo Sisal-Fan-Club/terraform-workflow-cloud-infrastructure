@@ -26,7 +26,7 @@ resource "oci_core_vcn" "vcn" {
 module "subnet" {
   for_each = local.subnets
   
-  source = "${path.module}/modules/subnet"
+  source = "./modules/subnet"
   providers = {
     oci = oci
   }
