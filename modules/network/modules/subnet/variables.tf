@@ -16,3 +16,5 @@ variable "exposed" {
 
 variable "routes_table" {
 }
+
+variable "default_gateway" {}
