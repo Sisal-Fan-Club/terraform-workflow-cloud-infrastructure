@@ -13,3 +13,6 @@ variable "exposed" {
   type = bool
   default = false
 }
+
+variable "routes_table" {
+}

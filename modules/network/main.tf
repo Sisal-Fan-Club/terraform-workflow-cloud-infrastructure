@@ -77,4 +77,6 @@ module "subnet" {
   name = each.key
   cidr = each.value.cidr
   exposed = each.value.exposed
+  
+  routes_table = each.value.exposed ? oci_core_route_table.public : oci_core_route_table.private
 }
