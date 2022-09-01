@@ -14,5 +14,4 @@ variable "exposed" {
   default = false
 }
 
-variable "routes_table" {
-}
+variable "default_gateway" {}
