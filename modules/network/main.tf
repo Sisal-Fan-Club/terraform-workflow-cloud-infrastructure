@@ -23,6 +23,47 @@ resource "oci_core_vcn" "vcn" {
   cidr_blocks = values(local.subnets)
 }
 
+resource "oci_core_internet_gateway" "igw" {
+  compartment_id = local.vcn.compartment_id
+  vcn_id = local.vcn.id
+}
+
+resource "oci_core_nat_gateway" "ngw" {
+  compartment_id = local.vcn.compartment_id
+  vcn_id = local.vcn.id
+}
+
+locals {
+  route_table_commons = {
+    compartment_id = local.vcn.compartment_id
+    vcn_id = local.vcn.id
+  }
+}
+
+resource "oci_core_route_table" "public" {
+  compartment_id = local.route_table_commons.compartment_id
+  vcn_id = local.route_table_commons.vcn_id
+  
+  route_rules {
+    description = "Default route via Internet Gateway (NAT 1:N)"
+    network_entity_id = oci_core_internet_gateway.igw
+    destination = "0.0.0.0/0"
+    destination_type = "CIDR_BLOCK"
+  }
+}
+
+resource "oci_core_route_table" "private" {
+  compartment_id = local.route_table_commons.compartment_id
+  vcn_id = local.route_table_commons.vcn_id
+  
+  route_rules {
+    description = "Default route via NAT Gateway (NAT N:1)"
+    network_entity_id = oci_core_nat_gateway.ngw
+    destination = "0.0.0.0/0"
+    destination_type = "CIDR_BLOCK"
+  }
+}
+
 module "subnet" {
   for_each = local.subnets
   
