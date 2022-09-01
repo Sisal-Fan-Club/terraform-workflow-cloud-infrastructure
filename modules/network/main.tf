@@ -26,11 +26,15 @@ resource "oci_core_vcn" "vcn" {
 resource "oci_core_internet_gateway" "igw" {
   compartment_id = local.vcn.compartment_id
   vcn_id = local.vcn.id
+  
+  display_name = "NAT 1:1"
 }
 
 resource "oci_core_nat_gateway" "ngw" {
   compartment_id = local.vcn.compartment_id
   vcn_id = local.vcn.id
+  
+  display_name = "NAT N:1"
 }
 
 module "subnet" {
