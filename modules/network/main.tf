@@ -22,3 +22,16 @@ resource "oci_core_vcn" "vcn" {
   
   cidr_blocks = values(local.subnets)
 }
+
+module "subnet" {
+  for_each = local.subnets
+  
+  source = "${path.module}/modules/subnet"
+  providers = {
+    oci = oci
+  }
+  
+  vcn = local.vcn
+  name = each.key
+  cidr = each.value
+}
