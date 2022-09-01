@@ -31,7 +31,14 @@ module "network" {
   
   compartment = module.governance.compartment
   subnets = {
-    app = "192.168.0.0/24"
-    dmz = "192.168.100.0/24"
+    app = {
+      cidr = "192.168.0.0/24"
+      exposed = false
+    }
+    
+    dmz = {
+      cidr = "192.168.100.0/24"
+      exposed = true
+    }
   }
 }
