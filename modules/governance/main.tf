@@ -9,7 +9,7 @@ terraform {
 }
 
 locals {
-  root_compartment = var.root_compartment
+  parent_compartment = var.parent_compartment
   name = var.name
   description = var.description
   
@@ -21,7 +21,7 @@ locals {
 }
 
 resource "oci_identity_compartment" "compartment" {
-  compartment_id = local.root_compartment
+  compartment_id = local.parent_compartment
   
   name = local.name
   description = local.description
