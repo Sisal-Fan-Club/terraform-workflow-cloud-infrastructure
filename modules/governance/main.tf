@@ -17,7 +17,9 @@ locals {
     app-code = var.app_code
     factory = var.factory
     environment = var.environment
-  } 
+  }
+  
+  compartment = oci_identity_compartment.compartment
 }
 
 resource "oci_identity_compartment" "compartment" {
