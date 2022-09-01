@@ -22,3 +22,16 @@ module "governance" {
   app_code = "nsfc"
   factory = "Digital"
 }
+
+module "network" {
+  source = "./modules/governance"
+  providers = {
+    oci = oci
+  }
+  
+  compartment = module.governance.compartment
+  subnets = {
+    app = "192.168.0.0/24"
+    dmz = "192.168.100.0/24"
+  }
+}
