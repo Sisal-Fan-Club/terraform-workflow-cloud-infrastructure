@@ -32,7 +32,7 @@ resource "oci_core_route_table" "routes" {
     
     content {
       description = route_rules.value.description
-      network_entity_id = route_rules.value.network_entity_id
+      network_entity_id = route_rules.value.gateway
       destination = route_rules.value.destination
       destination_type = route_rules.value.destination_type
     }
