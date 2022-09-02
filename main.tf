@@ -43,7 +43,7 @@ module "network" {
   }
 }
 
-module "network" {
+module "security" {
   source = "./modules/security"
   providers = {
     oci = oci
