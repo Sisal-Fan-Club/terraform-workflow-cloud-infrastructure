@@ -15,12 +15,12 @@ module "governance" {
   }
   
   parent_compartment = var.oci_tenancy_id
-  name = "sisalfunclub-test"
-  description = "Sisal Fun Club - Test Enviroment"
+  name = "sisalfanclub-test"
+  description = "Sisal Fan Club - Test Enviroment"
   
   environment = "test"
   app_code = "nsfc"
-  factory = "Digital"
+  factory = "digital"
 }
 
 module "observability" {
