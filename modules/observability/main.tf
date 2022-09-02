@@ -19,4 +19,6 @@ resource "oci_logging_log_group" "cloud-infrastructure" {
   
   display_name = "cloud-infrastructure"
   description = "Logs from Cloud Infrastructure components"
+  
+  freeform_tags = merge({}, local.compartment.freeform_tags)
 }
