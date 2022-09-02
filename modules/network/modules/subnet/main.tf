@@ -16,6 +16,7 @@ locals {
   default_gateway_id = var.default_gateway_id
   
   subnet = oci_core_subnet.subnet
+  routes = oci_core_route_table.routes
 }
 
 
@@ -23,7 +24,7 @@ resource "oci_core_route_table" "routes" {
   compartment_id = local.vcn.compartment_id
   vcn_id = local.vcn.id
   
-  display_name = local.subnet.display_name
+  display_name = local.name
   
   route_rules {
     description = "Default route"
@@ -43,4 +44,9 @@ resource "oci_core_subnet" "subnet" {
   prohibit_internet_ingress = !local.exposed
   
   route_table_id = oci_core_route_table.routes.id
+}
+
+resource "oci_core_route_table_attachment" "routing" {
+  subnet_id = local.subnet.id
+  route_table_id = local.routes.id
 }
