@@ -45,6 +45,31 @@ resource "oci_core_nat_gateway" "ngw" {
   freeform_tags = merge({}, local.vcn.freeform_tags)
 }
 
+data "oci_core_services" "oci_services" {
+  filter {
+    name = "name"
+    values = ["^All .* Services In Oracle Services Network"]
+    regex = true
+  }
+}
+
+resource "oci_core_service_gateway" "sgw" {
+  compartment_id = local.vcn.compartment_id
+  vcn_id = local.vcn.id
+
+  display_name = "OCI Backbone Gateway"
+
+  dynamic "services" {
+    for_each = { for service in data.oci_core_services.oci_services.services: 
+      service.id => service
+    }
+
+    content {
+      service_id = services.value.id
+    }
+  }
+}
+
 module "subnet" {
   for_each = local.subnets
   
