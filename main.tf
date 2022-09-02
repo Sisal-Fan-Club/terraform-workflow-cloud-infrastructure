@@ -23,7 +23,7 @@ module "governance" {
   factory = "Digital"
 }
 
-module "governance" {
+module "observability" {
   source = "./modules/observability"
   providers = {
     oci = oci
