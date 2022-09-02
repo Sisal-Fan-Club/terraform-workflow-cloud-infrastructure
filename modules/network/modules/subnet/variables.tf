@@ -17,5 +17,3 @@ variable "exposed" {
 variable "default_gateway_id" {
   type = string
 }
-
-variable "routes" {}
