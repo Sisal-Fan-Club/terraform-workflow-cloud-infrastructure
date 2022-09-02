@@ -62,7 +62,7 @@ resource "oci_logging_log" "network_flows" {
   log_group_id = local.log_group.id
   log_type = "SERVICE"
   
-  display_name = each.value.display_name
+  display_name = "subnet_${each.value.display_name}"
   retention_duration = 30
   
   configuration {
