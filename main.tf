@@ -9,12 +9,12 @@ terraform {
 }
 
 locals {
-  app_name = "sisalfanclub"
-  app_code = "nsfc"
-  factory = "digital"
-  environment = "test"
+  app_name = var.app_name
+  app_code = var.app_code
+  factory = var.factory
+  environment = var.environment
   
-  description = "Sisal Fan Club"
+  description = var.description
 }
 
 module "governance" {
