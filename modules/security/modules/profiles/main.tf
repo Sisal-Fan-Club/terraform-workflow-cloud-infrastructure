@@ -20,6 +20,8 @@ resource "oci_core_network_security_group" "profile" {
   vcn_id = local.vcn.id
   
   display_name = local.name
+  
+  freeform_tags = merge({}, local.vcn.freeform_tags)
 }
 
 resource "oci_core_network_security_group_security_rule" "default_ingress" {
