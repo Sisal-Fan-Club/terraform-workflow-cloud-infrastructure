@@ -30,3 +30,30 @@ resource "oci_core_security_list" "disabled" {
     destination  = "0.0.0.0/0"
   }
 }
+
+locals {
+  nsg_commons = {
+    compartment_id = local.vcn.compartment_id
+    vcn_id = local.vcn.id
+  }
+}
+resource "oci_core_network_security_group" "mgmt" {
+  compartment_id = local.nsg_commons.compartment_id
+  vcn_id = local.nsg_commons.id
+  
+  display_name = "Management Security Profile"
+}
+
+resource "oci_core_network_security_group" "app" {
+  compartment_id = local.nsg_commons.compartment_id
+  vcn_id = local.nsg_commons.id
+  
+  display_name = "Application Security Profile"
+}
+
+resource "oci_core_network_security_group" "dmz" {
+  compartment_id = local.nsg_commons.compartment_id
+  vcn_id = local.nsg_commons.id
+  
+  display_name = "DMZ Security Profile"
+}
