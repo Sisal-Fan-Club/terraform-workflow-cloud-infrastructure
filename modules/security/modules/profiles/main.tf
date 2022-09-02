@@ -33,3 +33,14 @@ resource "oci_core_network_security_group_security_rule" "default_ingress" {
   source = local.profile.id
 }
 
+resource "oci_core_network_security_group_security_rule" "default_egress" {
+  network_security_group_id = local.profile.id
+  
+  description = "Allow all traffic in same Security Profile"
+  
+  direction = "EGRESS"
+  protocol = "all"
+  destination_type = "NETWORK_SECURITY_GROUP"
+  destination = local.profile.id
+}
+
