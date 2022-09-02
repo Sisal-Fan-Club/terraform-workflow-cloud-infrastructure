@@ -1,3 +1,3 @@
 output "profiles" {
-  value = local.profiles
+  value = local.nsgs
 }
