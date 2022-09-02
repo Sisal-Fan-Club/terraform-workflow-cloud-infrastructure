@@ -23,6 +23,8 @@ resource "oci_core_vcn" "vcn" {
   display_name = local.compartment.description
   
   cidr_blocks = [ for name, subnet in local.subnets: subnet.cidr ]
+    
+  freeform_tags = merge({}, local.compartment.freeform_tags)
 }
 
 resource "oci_core_internet_gateway" "igw" {
@@ -30,6 +32,8 @@ resource "oci_core_internet_gateway" "igw" {
   vcn_id = local.vcn.id
   
   display_name = "NAT 1:1"
+  
+  freeform_tags = merge({}, local.vcn.freeform_tags)
 }
 
 resource "oci_core_nat_gateway" "ngw" {
@@ -37,6 +41,8 @@ resource "oci_core_nat_gateway" "ngw" {
   vcn_id = local.vcn.id
   
   display_name = "NAT N:1"
+  
+  freeform_tags = merge({}, local.vcn.freeform_tags)
 }
 
 module "subnet" {
@@ -75,4 +81,6 @@ resource "oci_logging_log" "network_flows" {
       resource = each.value.id
     }
   }
+    
+  freeform_tags = merge({}, local.vcn.freeform_tags)
 }
