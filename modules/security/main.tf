@@ -16,7 +16,7 @@ resource "oci_core_security_list" "disabled" {
   compartment_id = local.vcn.compartment_id
   vcn_id = local.vcn.id
   
-  display_name = "Disabled Security List"
+  display_name = "Disabled Security Lists"
   
   ingress_security_rules {
     description = "Allow all traffic TO the subnet"
