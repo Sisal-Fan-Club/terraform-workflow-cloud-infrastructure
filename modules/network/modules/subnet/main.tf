@@ -32,6 +32,8 @@ resource "oci_core_route_table" "routes" {
     destination = "0.0.0.0/0"
     destination_type = "CIDR_BLOCK"
   }
+  
+  freeform_tags = merge({}, local.vcn.freeform_tags)
 }
 
 resource "oci_core_subnet" "subnet" {
@@ -44,6 +46,8 @@ resource "oci_core_subnet" "subnet" {
   prohibit_internet_ingress = !local.exposed
   
   route_table_id = oci_core_route_table.routes.id
+  
+  freeform_tags = merge({}, local.vcn.freeform_tags)
 }
 
 resource "oci_core_route_table_attachment" "routing" {
