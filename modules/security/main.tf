@@ -24,6 +24,8 @@ locals {
       name = "DMZ Security Profile"
     }
   }
+  
+  profiles = module.profile
 }
 
 module "profile" {
