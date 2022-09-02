@@ -22,3 +22,9 @@ variable "oci_region_name" {
   type = string
   description = "(Required) OCI region name"
 }
+
+variable "app_name" {}
+variable "app_code" {}
+variable "factory" {}
+variable "environment" {}
+variable "description" {}
