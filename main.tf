@@ -8,6 +8,15 @@ terraform {
   }
 }
 
+locals {
+  app_name = "sisalfanclub"
+  app_code = "nsfc"
+  factory = "digital"
+  environment = "test"
+  
+  description = "Sisal Fan Club"
+}
+
 module "governance" {
   source = "./modules/governance"
   providers = {
@@ -15,12 +24,12 @@ module "governance" {
   }
   
   parent_compartment = var.oci_tenancy_id
-  name = "sisalfanclub-test"
-  description = "Sisal Fan Club - Test Enviroment"
+  name = format("%s-%s", local.app_name, local.environment)
+  description = format("%s - Environment: %s", local.description, local.environment)
   
-  environment = "test"
-  app_code = "nsfc"
-  factory = "digital"
+  environment = local.environment
+  app_code = local.app_code
+  factory = local.factory
 }
 
 module "observability" {
