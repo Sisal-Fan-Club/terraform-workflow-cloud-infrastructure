@@ -32,28 +32,29 @@ resource "oci_core_security_list" "disabled" {
 }
 
 locals {
-  nsg_commons = {
-    compartment_id = local.vcn.compartment_id
-    vcn_id = local.vcn.id
+  profiles = {
+    mgmt = {
+      name = "Management Security Profile"
+    }
+    
+    app = {
+      name = "Application Security Profile"
+    }
+    
+    dmz = {
+      name = "DMZ Security Profile"
+    }
   }
 }
-resource "oci_core_network_security_group" "mgmt" {
-  compartment_id = local.nsg_commons.compartment_id
-  vcn_id = local.nsg_commons.vcn_id
-  
-  display_name = "Management Security Profile"
-}
 
-resource "oci_core_network_security_group" "app" {
-  compartment_id = local.nsg_commons.compartment_id
-  vcn_id = local.nsg_commons.vcn_id
+module "profile" {
+  for_each = local.profiles
   
-  display_name = "Application Security Profile"
-}
-
-resource "oci_core_network_security_group" "dmz" {
-  compartment_id = local.nsg_commons.compartment_id
-  vcn_id = local.nsg_commons.vcn_id
+  source = "./modules/profiles"
+  providers = {
+    oci = oci
+  }
   
-  display_name = "DMZ Security Profile"
+  vcn = local.vcn
+  name = each.value.name
 }
