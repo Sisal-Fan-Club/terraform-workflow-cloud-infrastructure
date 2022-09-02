@@ -70,6 +70,18 @@ resource "oci_core_service_gateway" "sgw" {
   }
 }
 
+locals {
+  route_oci_services = {
+    for service in data.oci_core_services.oci_services.services:
+      service.id => {
+        description = ""
+        destination = service.cidr_block
+        destination_type = "SERVICE_CIDR_BLOCK"
+        gateway = oci_core_service_gateway.sgw.id
+      }
+  }
+}
+  
 module "subnet" {
   for_each = local.subnets
   
@@ -84,6 +96,8 @@ module "subnet" {
   cidr = each.value.cidr
   exposed = each.value.exposed
   
+  routes = merge({
+  }, local.route_oci_services)
   default_gateway_id = each.value.exposed ? oci_core_internet_gateway.igw.id : oci_core_nat_gateway.ngw.id
 }
   
