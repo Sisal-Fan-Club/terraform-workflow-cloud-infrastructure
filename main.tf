@@ -42,3 +42,12 @@ module "network" {
     }
   }
 }
+
+module "network" {
+  source = "./modules/security"
+  providers = {
+    oci = oci
+  }
+  
+  vcn = module.network.vcn
+}
