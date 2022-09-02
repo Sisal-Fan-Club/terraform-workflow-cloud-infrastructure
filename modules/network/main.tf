@@ -63,7 +63,7 @@ resource "oci_logging_log" "network_flows" {
   log_type = "SERVICE"
   
   display_name = each.value.display_name
-  retention_duration = 1
+  retention_duration = 30
   
   configuration {
     compartment_id = local.vcn.compartment_id
