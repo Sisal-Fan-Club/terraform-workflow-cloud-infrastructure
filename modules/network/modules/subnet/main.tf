@@ -13,7 +13,7 @@ locals {
   cidr = var.cidr
   name = var.name
   exposed = var.exposed
-  routes = var.routes
+  other_routes = var.routes
   default_gateway_id = var.default_gateway_id
   
   subnet = oci_core_subnet.subnet
@@ -28,7 +28,7 @@ resource "oci_core_route_table" "routes" {
   display_name = local.name
   
   dynamic "route_rules" {
-    for_each = local.routes
+    for_each = local.other_routes
     
     content {
       description = route_rules.value.description
