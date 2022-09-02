@@ -39,6 +39,8 @@ module "network" {
   }
   
   compartment = module.governance.compartment
+  log_group = module.observability.log_group
+
   subnets = {
     app = {
       cidr = "192.168.0.0/24"
