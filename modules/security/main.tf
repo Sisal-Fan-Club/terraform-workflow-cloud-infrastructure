@@ -25,7 +25,7 @@ locals {
     }
   }
   
-  profiles = module.profile
+  nsgs = module.profile
 }
 
 module "profile" {
