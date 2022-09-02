@@ -39,21 +39,21 @@ locals {
 }
 resource "oci_core_network_security_group" "mgmt" {
   compartment_id = local.nsg_commons.compartment_id
-  vcn_id = local.nsg_commons.id
+  vcn_id = local.nsg_commons.vcn_id
   
   display_name = "Management Security Profile"
 }
 
 resource "oci_core_network_security_group" "app" {
   compartment_id = local.nsg_commons.compartment_id
-  vcn_id = local.nsg_commons.id
+  vcn_id = local.nsg_commons.vcn_id
   
   display_name = "Application Security Profile"
 }
 
 resource "oci_core_network_security_group" "dmz" {
   compartment_id = local.nsg_commons.compartment_id
-  vcn_id = local.nsg_commons.id
+  vcn_id = local.nsg_commons.vcn_id
   
   display_name = "DMZ Security Profile"
 }
