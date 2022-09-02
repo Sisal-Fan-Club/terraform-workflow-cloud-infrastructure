@@ -10,6 +10,8 @@ terraform {
 
 locals {
   compartment = var.compartment
+  
+  log_group = oci_logging_log_group.cloud-infrastructure
 }
 
 resource "oci_logging_log_group" "cloud-infrastructure" {
