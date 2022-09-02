@@ -23,6 +23,8 @@ resource "oci_core_route_table" "routes" {
   compartment_id = local.vcn.compartment_id
   vcn_id = local.vcn.id
   
+  display_name = local.subnet.display_name
+  
   route_rules {
     description = "Default route"
     network_entity_id = local.default_gateway_id
