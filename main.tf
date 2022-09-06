@@ -60,11 +60,6 @@ module "network" {
       cidr = "10.244.0.0/16"
       exposed = false
     }
-    
-    dmz = {
-      cidr = "192.168.100.0/24"
-      exposed = true
-    }
   }
 }
 
@@ -84,6 +79,7 @@ module "kubernetes" {
   }
   
   compartment = module.governance.compartment
+  subnet_kubernetes = module.network.subnets.kubernetes
   subnet_pods = module.network.subnets.pods
     
   kubernetes_version = "v1.24.1"
