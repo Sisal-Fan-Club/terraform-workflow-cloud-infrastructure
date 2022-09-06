@@ -72,6 +72,7 @@ module "security" {
   vcn = module.network.vcn
 }
 
+ /*
 module "kubernetes" {
   source = "./modules/kubernetes"
   providers = {
@@ -84,3 +85,4 @@ module "kubernetes" {
     
   kubernetes_version = "v1.24.1"
 }
+*/
