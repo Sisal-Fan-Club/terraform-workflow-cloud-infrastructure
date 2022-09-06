@@ -76,3 +76,15 @@ module "security" {
   
   vcn = module.network.vcn
 }
+
+module "kubernetes" {
+  source = "./modules/kubernetes"
+  providers = {
+    oci = oci
+  }
+  
+  compartment = module.governance.compartment
+  subnet_pods = module.network.subnets.pods
+    
+  kubernetes_version = "v1.24.1"
+}
