@@ -77,6 +77,10 @@ output "debug" {
 }
 
 module "kubernetes" {
+  depends_on = [
+    module.network
+  ]
+  
   source = "./modules/kubernetes"
   providers = {
     oci = oci
