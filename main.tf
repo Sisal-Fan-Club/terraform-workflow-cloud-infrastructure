@@ -72,14 +72,7 @@ module "security" {
   vcn = module.network.vcn
 }
 
-output "debug" {
-  value = module.network.vcn
-}
-
 module "kubernetes" {
-  depends_on = [
-    module.network
-  ]
   
   source = "./modules/kubernetes"
   providers = {
@@ -87,8 +80,8 @@ module "kubernetes" {
   }
   
   compartment = module.governance.compartment
-  subnet_kubernetes = module.network.subnets.kubernetes
-  subnet_pods = module.network.subnets.pods
+  subnet_kubernetes = module.network.vcn.subnets.kubernetes
+  subnet_pods = module.network.vcn.subnets.pods
     
   kubernetes_version = "v1.24.1"
 }
