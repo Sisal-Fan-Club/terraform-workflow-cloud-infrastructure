@@ -51,8 +51,13 @@ module "network" {
   log_group = module.observability.log_group
 
   subnets = {
-    app = {
+    kubernetes = {
       cidr = "192.168.0.0/24"
+      exposed = false
+    }
+    
+    pods = {
+      cidr = "10.244.0.0/16"
       exposed = false
     }
     
