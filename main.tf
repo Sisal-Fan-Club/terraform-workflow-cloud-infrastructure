@@ -72,6 +72,9 @@ module "security" {
   vcn = module.network.vcn
 }
 
+output "debug" {
+  value = module.network.vcn
+}
  /*
 module "kubernetes" {
   source = "./modules/kubernetes"
